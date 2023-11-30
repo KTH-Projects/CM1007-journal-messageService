@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface MessageRepository extends JpaRepository<MessageDB, Long> {
     List<MessageDB> findByFromId(String Id);
+    List<MessageDB> findByFromIdAndToId(String fromId, String toId);
 
 }

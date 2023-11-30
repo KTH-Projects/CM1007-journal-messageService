@@ -27,9 +27,17 @@ public class MessageService {
         return new Message(fromId,toId,message);
     }
 
-    public List<Message> getConversation(String fromId) {
+    public List<Message> getMessagesFromId(String fromId) {
         ArrayList<Message> messageArrayList = new ArrayList<>();
         for(MessageDB m : messageRepository.findByFromId(fromId)){
+            messageArrayList.add(new Message(m.getFromId(),m.getToId(),m.getMessage()));
+        }
+        return messageArrayList;
+    }
+
+    public List<Message> getMessagesFromIdAndToId(String fromId, String toId) {
+        ArrayList<Message> messageArrayList = new ArrayList<>();
+        for(MessageDB m : messageRepository.findByFromIdAndToId(fromId,toId)){
             messageArrayList.add(new Message(m.getFromId(),m.getToId(),m.getMessage()));
         }
         return messageArrayList;

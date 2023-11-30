@@ -22,9 +22,15 @@ public class MessageController {
         return new ResponseEntity<>(sentMessage, HttpStatus.CREATED);
     }
 
-    @GetMapping("/conversation")
-    public ResponseEntity<List<Message>> getConversation(@RequestParam String fromId) {
-        List<Message> conversation = messageService.getConversation(fromId);
+    @GetMapping("")
+    public ResponseEntity<List<Message>> getMessagesFromId(@RequestParam String fromId) {
+        List<Message> conversation = messageService.getMessagesFromId(fromId);
+        return new ResponseEntity<>(conversation, HttpStatus.OK);
+    }
+
+    @GetMapping("/chat")
+    public ResponseEntity<List<Message>> getMessagesFromIdAndToId(@RequestParam String fromId, @RequestParam String toId) {
+        List<Message> conversation = messageService.getMessagesFromIdAndToId(fromId,toId);
         return new ResponseEntity<>(conversation, HttpStatus.OK);
     }
 

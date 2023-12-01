@@ -1,6 +1,6 @@
 package com.example.journalchat.core.service;
 
-import com.example.journalchat.core.entity.Message;
+import com.example.journalchat.core.entity.MessageDTO;
 import com.example.journalchat.persistance.entity.MessageDB;
 import com.example.journalchat.persistance.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ public class MessageService {
     @Autowired
     private MessageRepository messageRepository;
 
-    public Message sendMessage(String fromId, String toId, String message) {
+    public MessageDTO sendMessage(String fromId, String toId, String message) {
 
         MessageDB messageToSave = new MessageDB();
         messageToSave.setFromId(fromId);
@@ -24,21 +24,21 @@ public class MessageService {
 
         messageRepository.save(messageToSave);
 
-        return new Message(fromId,toId,message);
+        return new MessageDTO(fromId,toId,message);
     }
 
-    public List<Message> getMessagesFromId(String fromId) {
-        ArrayList<Message> messageArrayList = new ArrayList<>();
+    public List<MessageDTO> getMessagesFromId(String fromId) {
+        ArrayList<MessageDTO> messageArrayList = new ArrayList<>();
         for(MessageDB m : messageRepository.findByFromId(fromId)){
-            messageArrayList.add(new Message(m.getFromId(),m.getToId(),m.getMessage()));
+            messageArrayList.add(new MessageDTO(m.getFromId(),m.getToId(),m.getMessage()));
         }
         return messageArrayList;
     }
 
-    public List<Message> getMessagesFromIdAndToId(String fromId, String toId) {
-        ArrayList<Message> messageArrayList = new ArrayList<>();
+    public List<MessageDTO> getMessagesFromIdAndToId(String fromId, String toId) {
+        ArrayList<MessageDTO> messageArrayList = new ArrayList<>();
         for(MessageDB m : messageRepository.findByFromIdAndToId(fromId,toId)){
-            messageArrayList.add(new Message(m.getFromId(),m.getToId(),m.getMessage()));
+            messageArrayList.add(new MessageDTO(m.getFromId(),m.getToId(),m.getMessage()));
         }
         return messageArrayList;
     }

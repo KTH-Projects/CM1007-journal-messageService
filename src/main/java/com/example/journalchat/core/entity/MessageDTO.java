@@ -3,9 +3,9 @@ package com.example.journalchat.core.entity;
 import lombok.*;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class Message {
+    @NoArgsConstructor
+    @AllArgsConstructor
+public class MessageDTO {
 
     private String fromId;
 

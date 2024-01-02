@@ -17,21 +17,21 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @PreAuthorize("hasRole('user')")
+    //@PreAuthorize("hasRole('user')")
     @PostMapping("/send")
     public ResponseEntity<MessageDTO> sendMessage(@RequestBody MessageDTO message){
         MessageDTO sentMessage = messageService.sendMessage(message.getFromId(), message.getToId(), message.getMessage());
         return new ResponseEntity<>(sentMessage, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole('user')")
+    //@PreAuthorize("hasRole('user')")
     @GetMapping("")
     public ResponseEntity<List<MessageDTO>> getMessagesFromId(@RequestParam String fromId) {
         List<MessageDTO> conversation = messageService.getMessagesFromId(fromId);
         return new ResponseEntity<>(conversation, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('user')")
+    //@PreAuthorize("hasRole('user')")
     @GetMapping("/chat")
     public ResponseEntity<List<MessageDTO>> getMessagesFromIdAndToId(@RequestParam String fromId, @RequestParam String toId) {
         List<MessageDTO> conversation = messageService.getMessagesFromIdAndToId(fromId,toId);
